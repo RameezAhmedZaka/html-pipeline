@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     echo 'Linting HTML...'
-                    sh 'npm install -g htmlhint || true' // Install htmlhint, ignoring errors if already installed
+                    sh 'mvn install -g htmlhint || true' // Install htmlhint, ignoring errors if already installed
                     def result = sh(script: 'htmlhint index.html', returnStatus: true)
                     if (result != 0) {
                         error('HTML linting failed')
