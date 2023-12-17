@@ -14,22 +14,20 @@ pipeline {
                 }
             }
         }
-    }
 
-    stage('Deploy to Apache') {
-    steps {
-        echo 'Deploying to Apache...'
-        def apacheDir = '/var/www/html'
+        stage('Deploy to Apache') {
+            steps {
+                echo 'Deploying to Apache...'
+                def apacheDir = '/var/www/html'
 
-        sh "mkdir -p ${apacheDir}"
+                sh "mkdir -p ${apacheDir}"
 
-        // Copy HTML files to Apache directory
-        sh "cp -r * ${apacheDir}/"
+                // Copy HTML files to Apache directory
+                sh "cp -r * ${apacheDir}/"
 
-        // Optionally, restart Apache to apply changes
-        sh "sudo service apache2 restart"
+                // Optionally, restart Apache to apply changes
+                sh "sudo service apache2 restart"
+            }
+        }
     }
 }
-
-}
-
