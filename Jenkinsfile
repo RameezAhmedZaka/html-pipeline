@@ -18,12 +18,10 @@ pipeline {
         stage('Deploy to Apache') {
             steps {
                 echo 'Deploying to Apache...'
-                def apacheDir = '/var/www/html'
-
-                sh "mkdir -p ${apacheDir}"
+                sh "cd /var/www/html/"
 
                 // Copy HTML files to Apache directory
-                sh "cp -r * ${apacheDir}/"
+                sh "cp -r * /var/www/html/"
 
                 // Optionally, restart Apache to apply changes
                 sh "sudo service apache2 restart"
