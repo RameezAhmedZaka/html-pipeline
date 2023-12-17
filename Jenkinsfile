@@ -4,36 +4,32 @@ pipeline {
     stages {
         stage('Lint HTML') {
             steps {
-                // Checkout code from GitHub
-                checkout scm
-                
-                // Run HTML linter (using htmlhint as an example)
-                sh 'npm install -g htmlhint'
-                sh 'htmlhint index.html'
-            }
-        }
-
-        stage('Deploy to Apache Server') {
-            when {
-                // Run this stage only if the previous stage succeeds
-                expression { currentBuild.resultIsBetterOrEqualTo('SUCCESS') }
-            }
-            steps {
-                // Copy HTML files to Apache server directory
-                sh 'cp index.html /path/to/apache/www/'
-
-                // Restart Apache server if necessary
-                sh 'systemctl restart apache2'
+                script {
+                    echo 'Linting HTML...'
+                    sh 'npm install -g htmlhint || true' // Install htmlhint, ignoring errors if already installed
+                    def result = sh(script: 'htmlhint index.html', returnStatus: true)
+                    if (result != 0) {
+                        error('HTML linting failed')
+                    }
+                }
             }
         }
     }
 
-    post {
-        // Notify on failure
-        failure {
-            emailext subject: 'Pipeline Failed',
-                      body: 'The Jenkins pipeline has failed. Please check the build logs for details.',
-                      to: 'rameezahmad145@gmail.com'
-        }
+    stage('Deploy to Apache') {
+    steps {
+        echo 'Deploying to Apache...'
+        def apacheDir = '/var/www/html'
+
+        sh "mkdir -p ${apacheDir}"
+
+        // Copy HTML files to Apache directory
+        sh "cp -r * ${apacheDir}/"
+
+        // Optionally, restart Apache to apply changes
+        sh "sudo service apache2 restart"
     }
+}
+
+}
 }
