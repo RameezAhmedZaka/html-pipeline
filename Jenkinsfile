@@ -19,6 +19,7 @@ pipeline {
                  
                    
                     sh 'export PATH=~/.npm-global/bin:$PATH'
+                    sh 'source ~/.bashrc'
                     sh 'npm install -g htmlhint'
 
                     // Run HTML linter on the desired files
