@@ -22,7 +22,7 @@ pipeline {
                     sh 'npm install -g htmlhint'
 
                     // Run HTML linter on the desired files
-                    sh 'htmlhint /var/jenkins_home/workspace/HTML-pipeline/index.html'
+                    sh 'htmlhint workspace/HTML-pipeline/index.html'
                 }
             }
         }
