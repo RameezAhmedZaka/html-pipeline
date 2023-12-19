@@ -15,7 +15,10 @@ pipeline {
                 script {
                     echo 'Linting HTML...'
 
-                    // Install HTML linter (e.g., HTMLHint)
+                 
+                    sh 'mkdir ~/.npm-global'
+                    sh 'export PATH=~/.npm-global/bin:$PATH'
+                    sh 'source ~/.bashrc'
                     sh 'npm install -g htmlhint'
 
                     // Run HTML linter on the desired files
