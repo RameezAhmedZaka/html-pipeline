@@ -9,7 +9,7 @@ pipeline {
             }
         }
 
-   stage('Lint HTML') {
+  stage('Lint HTML') {
     steps {
         script {
             echo 'Linting HTML...'
@@ -18,7 +18,7 @@ pipeline {
             sh 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash'
 
             // Load NVM
-            sh 'export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"'
+            sh 'export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && \\. "$NVM_DIR/nvm.sh"'
 
             // Install Node.js using NVM
             sh 'nvm install 14'
@@ -34,6 +34,7 @@ pipeline {
         }
     }
 }
+
 
         stage('Deploy to Apache') {
             steps {
