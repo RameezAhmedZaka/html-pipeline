@@ -9,15 +9,6 @@ pipeline {
             }
         }
         
-        stage('Install NodeJS') {
-            steps {
-                script {
-                    // Install NodeJS using the configured tool
-                    def nodejsHome = tool 'NodeJS'
-                    env.PATH = "${nodejsHome}/bin:${env.PATH}"
-                }
-            }
-        }
 
         stage('Lint HTML') {
             steps {
