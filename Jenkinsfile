@@ -8,27 +8,37 @@ pipeline {
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'jenkinstoken', url: 'https://github.com/RameezAhmedZaka/html-pipeline.git']])
             }
         }
-stage('Lint HTML') {
-    steps {
-        script {
-            echo 'Linting HTML...'
+pipeline {
+    agent any
 
-            // Install NVM
-            sh 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash'
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
 
-            // Load NVM
-            sh 'export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && \\. "$NVM_DIR/nvm.sh"'
+        stage('Install NodeJS') {
+            steps {
+                script {
+                    // Install NodeJS using the configured tool
+                    def nodejsHome = tool 'NodeJS'
+                    env.PATH = "${nodejsHome}/bin:${env.PATH}"
+                }
+            }
+        }
 
-            // Install Node.js using NVM
-            sh 'nvm install 14'
+        stage('Lint HTML') {
+            steps {
+                script {
+                    echo 'Linting HTML...'
 
-            // Install htmlhint
-            sh 'npm install -g htmlhint || true'
+                    // Install HTML linter (e.g., HTMLHint)
+                    sh 'npm install -g htmlhint'
 
-            // Run htmlhint
-            def result = sh(script: 'htmlhint index.html', returnStatus: true)
-            if (result != 0) {
-                error('HTML linting failed')
+                    // Run HTML linter on the desired files
+                    sh 'htmlhint /var/jenkins_home/workspace/HTML-pipeline*.html'
+                }
             }
         }
     }
