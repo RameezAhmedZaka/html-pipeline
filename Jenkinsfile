@@ -9,29 +9,31 @@ pipeline {
             }
         }
 
-        stage('Lint HTML') {
-            environment {
-                PATH = "/path/to/nodejs/bin:${env.PATH}"
-            }
-            steps {
-                script {
-                    echo 'Linting HTML...'
-                    
-                    // Install Node.js and npm if not already installed
-                    sh 'curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -'
-                    sh 'sudo apt-get install -y nodejs'
+   stage('Lint HTML') {
+    steps {
+        script {
+            echo 'Linting HTML...'
 
-                    // Install htmlhint
-                    sh 'npm install -g htmlhint || true' // Install htmlhint, ignoring errors if already installed
+            // Install NVM
+            sh 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash'
 
-                    // Run htmlhint
-                    def result = sh(script: 'htmlhint index.html', returnStatus: true)
-                    if (result != 0) {
-                        error('HTML linting failed')
-                    }
-                }
+            // Load NVM
+            sh 'export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"'
+
+            // Install Node.js using NVM
+            sh 'nvm install 14'
+
+            // Install htmlhint
+            sh 'npm install -g htmlhint || true'
+
+            // Run htmlhint
+            def result = sh(script: 'htmlhint index.html', returnStatus: true)
+            if (result != 0) {
+                error('HTML linting failed')
             }
         }
+    }
+}
 
         stage('Deploy to Apache') {
             steps {
