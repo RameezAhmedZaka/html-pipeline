@@ -8,44 +8,27 @@ pipeline {
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'jenkinstoken', url: 'https://github.com/RameezAhmedZaka/html-pipeline.git']])
             }
         }
-    }
-pipeline {
-    agent any
-
-    stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-
-        stage('Install NodeJS') {
-            steps {
-                script {
-                    // Install NodeJS using the configured tool
-                    def nodejsHome = tool 'NodeJS'
-                    env.PATH = "${nodejsHome}/bin:${env.PATH}"
-                }
-            }
-        }
 
         stage('Lint HTML') {
             steps {
                 script {
                     echo 'Linting HTML...'
 
+                    // Install NodeJS using the configured tool
+                    def nodejsHome = tool 'NodeJS'
+                    env.PATH = "${nodejsHome}/bin:${env.PATH}"
+
                     // Install HTML linter (e.g., HTMLHint)
                     sh 'npm install -g htmlhint'
 
-                    // Run HTML linter on the desired files
-                    sh 'htmlhint /var/jenkins_home/workspace/HTML-pipeline*.html'
+                    // Find HTML files in the workspace
+                    def htmlFiles = findFiles(glob: '**/*.html')
+
+                    // Run HTML linter on the found HTML files
+                    sh "htmlhint ${htmlFiles.collect { "'${it}" }.join(' ')}"
                 }
             }
         }
-    }
-}
-
-
 
         stage('Deploy to Apache') {
             steps {
@@ -59,4 +42,4 @@ pipeline {
             }
         }
     }
-
+}
