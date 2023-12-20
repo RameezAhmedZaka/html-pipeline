@@ -19,7 +19,6 @@ pipeline {
                         sh 'rm -rf /var/jenkins_home/workspace/HTML-pipeline@2/'
                         sh 'rm -rf /var/jenkins_home/workspace/HTML-pipeline@2@temp/'   
                         sh 'export PATH=~/.npm-global/bin:$PATH'
-                        sh 'source ~/.bashrc'
                         sh 'npm install -g htmlhint'
                         sh 'cd /var/jenkins_home/workspace/'
                         sh 'htmlhint ./'
