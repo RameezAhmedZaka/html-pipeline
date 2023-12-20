@@ -28,6 +28,7 @@ pipeline {
                     catch (Exception e) {
                         echo 'HTML Linter failed'
                         currentBuild.result = 'FAILURE'
+                        
                     }
                 }
             }
