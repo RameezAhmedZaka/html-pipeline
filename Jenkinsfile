@@ -15,6 +15,7 @@ pipeline {
 
                 script {
                     try {
+                        sh 'rm -rf /var/jenkins_home/workspace/HTML-pipeline@temp/'
                         sh 'export PATH=~/.npm-global/bin:$PATH'
                         sh 'source ~/.bashrc'
                         sh 'curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -'
@@ -28,6 +29,15 @@ pipeline {
                         echo 'HTML Linter failed'
                         currentBuild.result = 'FAILURE'
                     }
+                    post {
+
+        always {
+
+            cleanWs() // clean workspace
+
+        }
+
+    }
                 }
             }
         }
@@ -50,4 +60,5 @@ pipeline {
             }
         }
     }
+    
 }
