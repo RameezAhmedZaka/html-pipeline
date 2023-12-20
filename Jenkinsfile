@@ -20,8 +20,6 @@ pipeline {
                         sh 'rm -rf /var/jenkins_home/workspace/HTML-pipeline@2@temp/'
                         sh 'curl -sL https://deb.nodesource.com/setup_12.x'
                         sh 'mkdir -p /var/lib/apt/lists/partial'
-                        sh 'chmod 755 /var/lib/apt/lists/partial'
-                        sh 'chown root:root /var/lib/apt/lists/partial'
                         sh 'apt-get install -y nodejs'   
                         sh 'export PATH=~/.npm-global/bin:$PATH'
                         sh 'source ~/.bashrc'
