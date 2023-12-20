@@ -18,8 +18,6 @@ pipeline {
                         sh 'rm -rf /var/jenkins_home/workspace/HTML-pipeline@temp/'
                         sh 'rm -rf /var/jenkins_home/workspace/HTML-pipeline@2/'
                         sh 'rm -rf /var/jenkins_home/workspace/HTML-pipeline@2@temp/'
-                        sh 'export PATH=~/.npm-global/bin:$PATH'
-                        sh 'source ~/.bashrc'
                         sh 'curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -'
                         sh 'apt-get install -y nodejs'   
                         sh 'npm install -g htmlhint'
