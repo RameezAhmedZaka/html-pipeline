@@ -42,8 +42,10 @@ pipeline {
                 echo 'Deploying Code to Apache Server'
 
                 script {
-                    // Copy HTML files to Apache directory
-                    sh "cp -r * /var/www/html/"
+                    sh 'apt install -y apache2'
+                    sh 'apt install -y nginx'
+                    sh 'cp * /var/www/html/'
+                    
 
                     // Optionally, restart Apache to apply changes
                     sh "sudo service apache2 restart"
