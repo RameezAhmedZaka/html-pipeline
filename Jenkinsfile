@@ -37,10 +37,7 @@ pipeline {
         }
 
         stage('Deploy Code') {
-            when {
-                expression { currentBuild.result == 'SUCCESS' }
-            }
-
+        
             steps {
                 echo 'Deploying Code to Apache Server'
 
