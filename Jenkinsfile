@@ -18,6 +18,11 @@ pipeline {
                         sh 'export PATH=~/.npm-global/bin:$PATH'
                         sh 'source ~/.bashrc'
                         sh 'npm install -g htmlhint'
+                        def deployScriptDir = script_dir + '/deploy_scripts'
+
+                        def shell = sh(script: 'echo $SHELL', returnStdout: true).trim()
+
+                        def sourceCommand = shell == '/bin/bash' ? 'source' : '.'
                         sh 'htmlhint ./'
                         echo 'HTML Linter passed'
                     }
