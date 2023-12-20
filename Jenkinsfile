@@ -11,30 +11,68 @@ pipeline {
 
         
 
-        stage('Lint HTML') {
+        stages {
+
+        stage('Trigger Jenkins Job') {
+
             steps {
+
+                echo 'Triggering Jenkins Job'
+
                 script {
-                    echo 'Linting HTML...'
 
-                 
-                   
-                    sh 'export PATH=~/.npm-global/bin:$PATH'
-                    sh 'source ~/.bashrc'
-                    sh 'npm install -g htmlhint'
+                    build job: 'your-jenkins-job', parameters: [], wait: true
 
-                    // Run HTML linter on the desired files
-                    sh 'htmlhint workspace/HTML-pipeline/index.html'
                 }
+
             }
+
         }
-    
 
+        stage('HTML Linter') {
 
-
-
-        stage('Deploy to Apache') {
             steps {
-                echo 'Deploying to Apache...'
+
+                echo 'Running HTML Linter'
+
+                script {
+
+                    try {
+
+                        sh 'npm install -g htmlhint'
+
+                        sh 'htmlhint ./'
+
+                        echo 'HTML Linter passed'
+
+                    }
+                    catch (Exception e) {
+
+                        echo 'HTML Linter failed'
+
+                        currentBuild.result = 'FAILURE'
+
+                    }
+
+                }
+
+            }
+
+        }
+
+        stage('Deploy Code') {
+
+            when {
+
+                expression { currentBuild.result == 'SUCCESS' }
+
+            }
+
+            steps {
+
+                echo 'Deploying Code to Apache Server'
+
+                script {
 
                 // Copy HTML files to Apache directory
                 sh "cp -r * /var/www/html/"
