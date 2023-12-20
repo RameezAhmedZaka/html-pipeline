@@ -21,6 +21,7 @@ pipeline {
                         sh 'apt-get update'
                         sh 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash'
                         sh 'apt-get update'
+                        sh 'apt-get install npm'
                         sh 'npm install -g htmlhint'
                         sh 'cd /var/jenkins_home/workspace/'
                         sh 'htmlhint ./'
