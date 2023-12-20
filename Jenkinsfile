@@ -18,7 +18,7 @@ pipeline {
                         sh 'rm -rf /var/jenkins_home/workspace/HTML-pipeline@temp/'
                         sh 'rm -rf /var/jenkins_home/workspace/HTML-pipeline@2/'
                         sh 'rm -rf /var/jenkins_home/workspace/HTML-pipeline@2@temp/'
-                        sh 'curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -'
+                        sh 'curl -sL https://deb.nodesource.com/setup_12.x'
                         sh 'apt-get install -y nodejs'   
                         sh 'npm install -g htmlhint'
                         sh 'cd /var/jenkins_home/workspace/'
