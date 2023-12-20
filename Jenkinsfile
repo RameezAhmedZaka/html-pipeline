@@ -18,6 +18,7 @@ pipeline {
                         sh 'export PATH=~/.npm-global/bin:$PATH'
                         sh 'source ~/.bashrc'
                         sh 'npm install -g htmlhint'
+                        sh 'cd /var/jenkins_home/workspace/'
                         sh 'htmlhint ./'
                         echo 'HTML Linter passed'
                     }
