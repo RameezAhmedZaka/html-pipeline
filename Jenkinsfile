@@ -19,7 +19,6 @@ pipeline {
                         sh 'rm -rf /var/jenkins_home/workspace/HTML-pipeline@2/'
                         sh 'rm -rf /var/jenkins_home/workspace/HTML-pipeline@2@temp/'
                         sh 'curl -sL https://deb.nodesource.com/setup_12.x'
-                        sh 'apt-get update'
                         sh 'mkdir -p /var/lib/apt/lists/partial'
                         sh 'chown root:root /var/lib/apt/lists/partial'
                         sh 'chmod 755 /var/lib/apt/lists/partial'
