@@ -48,7 +48,7 @@ pipeline {
                     
 
                     // Optionally, restart Apache to apply changes
-                    sh "sudo service apache2 restart"
+                    sh 'service apache2 restart'
                 }
             }
         }
