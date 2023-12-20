@@ -15,7 +15,6 @@ pipeline {
 
                 script {
                     try {
-                        sh 'mkdir ~/.npm-global'
                         sh 'export PATH=~/.npm-global/bin:$PATH'
                         sh 'source ~/.bashrc'
                         sh 'npm install -g htmlhint'
