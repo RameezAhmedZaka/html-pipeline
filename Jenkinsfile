@@ -19,7 +19,7 @@ pipeline {
                         sh 'rm -rf /var/jenkins_home/workspace/HTML-pipeline@2@temp/'   
                         sh 'export PATH=~/.npm-global/bin:$PATH'
                         sh 'apt-get update'
-                        sh 'apt-get install -y npm'
+                        sh 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash'
                         sh 'apt-get update'
                         sh 'npm install -g htmlhint'
                         sh 'cd /var/jenkins_home/workspace/'
