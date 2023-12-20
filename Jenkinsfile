@@ -15,7 +15,6 @@ pipeline {
 
                 script {
                     try {
-                        git 'https://github.com/RameezAhmedZaka/html-pipeline.git'
                         sh 'export PATH=~/.npm-global/bin:$PATH'
                         sh 'source ~/.bashrc'
                         sh 'npm install -g htmlhint'
