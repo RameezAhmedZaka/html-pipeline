@@ -17,6 +17,8 @@ pipeline {
                     try {
                         sh 'export PATH=~/.npm-global/bin:$PATH'
                         sh 'source ~/.bashrc'
+                        sh 'curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -'
+                        sh 'apt-get install -y nodejs'   
                         sh 'npm install -g htmlhint'
                         sh 'cd /var/jenkins_home/workspace/'
                         sh 'htmlhint ./'
