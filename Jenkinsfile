@@ -49,7 +49,7 @@ pipeline {
                     sh 'chmod 700 index.html'
                     // Optionally, restart Apache to apply changes
                     sh 'service apache2 restart'
-                    sh 'service restart nginx'
+                  
                 }
             }
         }
