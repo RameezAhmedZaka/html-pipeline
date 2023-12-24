@@ -30,13 +30,19 @@ pipeline {
                     catch (Exception e) {
                         echo 'HTML Linter failed'
                         currentBuild.result = 'FAILURE'
-                        return
+                
                     }
                 }
             }
         }
 
         stage('Deploy Code') {
+            
+            when {
+
+        expression { currentBuild.result == 'SUCCESS' }
+
+                 }
         
             steps {
                 echo 'Deploying Code to Apache Server'
