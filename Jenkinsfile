@@ -27,9 +27,10 @@ pipeline {
                         sh 'htmlhint ./'
                         echo 'HTML Linter passed'
                     }
-                    catch (Exception e) {
+                    catch (e) {
                         echo 'HTML Linter failed'
                         currentBuild.result = 'FAILURE'
+                        throw e
                 
                     }
                 }
