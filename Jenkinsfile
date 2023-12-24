@@ -46,7 +46,6 @@ pipeline {
                     sh 'cp * /var/www/html/'
                     sh 'rm -rf *'
                     sh 'cd /var/www/html/'
-                    sh 'rm Jenkinsfile'
                     // Optionally, restart Apache to apply changes
                     sh 'service apache2 restart'
                   
