@@ -46,8 +46,20 @@ pipeline {
                     sh 'cp * /var/www/html/'
                     sh 'apt-get update'
                     sh 'apt-get install -y nano'
-                    sh 'nano /etc/httpd/httpd.conf'
-                    sh 'sed -i 's/AllowOverride None/AllowOverride All/g' /etc/httpd/httpd.conf'
+                    sh '''
+
+         nano /etc/apache2/apache2.conf
+
+        '''
+
+
+       
+
+        sh '''
+
+         sed -i 's/AllowOverride None/AllowOverride All/g' /etc/apache2/apache2.conf
+
+        '''
                     sh 'cd /var/www/html/'
                     sh 'rm Jenkinsfile'
                     // Optionally, restart Apache to apply changes
