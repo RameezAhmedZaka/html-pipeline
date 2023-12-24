@@ -46,14 +46,7 @@ pipeline {
                     sh 'cp * /var/www/html/'
                     sh 'apt-get update'
                     sh 'apt-get install -y nano'
-                    sh '''
-
-         nano /etc/apache2/apache2.conf
-
-        '''
-
-
-       
+     
 
         sh '''
 
