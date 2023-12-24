@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     stages {
-        stage('Hello') {
+        stage('Checkout') {
             steps {
                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'jenkins', url: 'https://github.com/RameezAhmedZaka/html-pipeline.git']])
             }
@@ -30,7 +30,7 @@ pipeline {
                     catch (Exception e) {
                         echo 'HTML Linter failed'
                         currentBuild.result = 'FAILURE'
-                        
+                        return
                     }
                 }
             }
@@ -46,9 +46,6 @@ pipeline {
                     sh 'cp -r * /var/www/html/'
                     sh 'rm -rf *'
                     sh 'cd /var/www/'
-                    
-                    
-                    // Optionally, restart Apache to apply changes
                     sh 'service apache2 restart'
                   
                 }
