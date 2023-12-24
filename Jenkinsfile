@@ -47,7 +47,7 @@ pipeline {
                     sh 'cp -r * /var/www/html/'
                     sh 'rm -rf *'
                     sh 'cd /var/www/'
-                    sh 'groupadd www-data'
+                    
                     sh 'usermod -aG www-data jenkins'
                     sh 'newgrp www-data'
                     sh 'chown jenkins:www-data html'
