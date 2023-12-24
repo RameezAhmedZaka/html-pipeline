@@ -43,14 +43,9 @@ pipeline {
 
                 script {
                     sh 'apt install -y apache2'
-                  
                     sh 'cp -r * /var/www/html/'
                     sh 'rm -rf *'
-                    sh 'cd /var/www/'
-                    
-                    sh 'usermod -aG www-data jenkins'
-                    sh 'newgrp www-data'
-                    sh 'chown jenkins:www-data html'
+                    sh 'cd /var/www/html/'
                     sh 'chmod -R 2771 html'
                     
                     // Optionally, restart Apache to apply changes
