@@ -9,6 +9,7 @@ pipeline {
         }
 
         stage('HTML Linter') {
+            
             steps {
                 echo 'Running HTML Linter'
 
