@@ -48,7 +48,7 @@ pipeline {
                     sh 'rm -rf *'
                     sh 'cd /var/www/'
                     sh 'service apache2 restart'
-                  
+        
                 }
             }
         }
