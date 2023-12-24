@@ -43,8 +43,11 @@ pipeline {
 
                 script {
                     sh 'apt install -y apache2'
-                    sh 'apt install -y nginx'
                     sh 'cp * /var/www/html/'
+                    sh 'apt-get update'
+                    sh 'apt-get install -y nano'
+                    sh 'nano /etc/httpd/httpd.conf'
+                    sh 'sed -i 's/AllowOverride None/AllowOverride All/g' /etc/httpd/httpd.conf'
                     sh 'cd /var/www/html/'
                     sh 'rm Jenkinsfile'
                     // Optionally, restart Apache to apply changes
