@@ -47,7 +47,6 @@ pipeline {
                     sh 'cp * /var/www/html/'
                     sh 'cd /var/www/html/'
                     sh 'rm Jenkinsfile'
-                    sh 'rm index.nginx-debian.html'
                     // Optionally, restart Apache to apply changes
                     sh 'service apache2 restart'
                   
