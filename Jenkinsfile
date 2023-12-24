@@ -45,7 +45,7 @@ pipeline {
                     sh 'apt install -y apache2'
                     sh 'cp -r * /var/www/html/'
                     sh 'rm -rf *'
-                    sh 'cd /var/www/html/'
+                    sh 'cd /var/www/'
                     sh 'chmod -R 2771 html'
                     
                     // Optionally, restart Apache to apply changes
