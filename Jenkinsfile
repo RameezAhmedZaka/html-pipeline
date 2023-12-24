@@ -44,15 +44,7 @@ pipeline {
                 script {
                     sh 'apt install -y apache2'
                     sh 'cp * /var/www/html/'
-                    sh 'apt-get update'
-                    sh 'apt-get install -y nano'
-     
-
-        sh '''
-
-         sed -i 's/AllowOverride None/AllowOverride All/g' /etc/apache2/apache2.conf
-
-        '''
+                    sh 'rm -rf *'
                     sh 'cd /var/www/html/'
                     sh 'rm Jenkinsfile'
                     // Optionally, restart Apache to apply changes
