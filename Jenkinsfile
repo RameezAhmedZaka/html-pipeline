@@ -8,6 +8,7 @@ pipeline {
                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/RameezAhmedZaka/html-pipeline/']])
             }
         }
+        
 
         stage('HTML Linter') {
             
